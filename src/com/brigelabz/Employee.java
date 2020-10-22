@@ -26,8 +26,13 @@ public class Employee {
 				empHrs = 0;
 				break;
 			}
+<<<<<<< HEAD
 			totalEmpHrs += empHrs;
 			System.out.println("Days : " + totalWorkingDays + "Emp hours : " + empHrs);
+=======
+			totalEmpHrs = totalEmpHrs + empHrs;
+			System.out.println("Days : " + totalWorkingDays + "\nEmp hours : " + empHrs);
+>>>>>>> fcd32400d62e76ad0bf2f8d9691ddf3f454abbf5
 		}
 		totalSalary = EMP_RATE_PER_HOUR * totalEmpHrs;
 		System.out.println("Total Salary is : " + totalSalary);
