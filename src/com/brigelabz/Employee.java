@@ -1,24 +1,29 @@
 package com.brigelabz;
 
-public class Employee {
+public class Employee{
 	public static final int IS_FULL_TIME = 1;
 	public static final int IS_PART_TIME = 2;
-	public final int empRatePerHour;
-	public final int numOfWorkingDays;
-	public final int maxHoursInMonth;
-	public final String comname;
-	public int totalEmpWage;
+	
 
-	public Employee(String comname, int empRatePerHour, int numOfWorkingDays, int maxHoursInMonth) {
-		this.comname = comname;
-		this.empRatePerHour = empRatePerHour;
-		this.numOfWorkingDays = numOfWorkingDays;
-		this.maxHoursInMonth = maxHoursInMonth;
+	private int numOfComany=0;
+	private CompEmpWage[] companyWageArray;
+	public Employee() {
+		companyWageArray = new CompEmpWage[3];
 	}
-
-	public int calculateWage() {
-		int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
-		while (totalEmpHrs < maxHoursInMonth && totalWorkingDays < numOfWorkingDays) {
+	
+	public void companyEmpWage(String comname,int empRatePerHour, int numOfWorkingDays, int maxHoursInMonth){
+		companyWageArray[numOfComany]=new CompEmpWage(comname,empRatePerHour, numOfWorkingDays, maxHoursInMonth);
+		numOfComany++;
+	}
+	public void calculateWage() {
+		for (int i=0;i< numOfComany;i++){
+			companyWageArray[i].setTotalEmpWage(this.calculateWage(companyWageArray[i]));
+			System.out.println(companyWageArray[i]);
+		}
+	}
+	public int calculateWage(CompEmpWage compEmpWage) {
+		 int empHrs = 0, totalEmpHrs = 0,totalWorkingDays = 0;
+		while (totalEmpHrs < compEmpWage.maxHoursInMonth && totalWorkingDays < compEmpWage.numOfWorkingDays) {
 			totalWorkingDays++;
 			int empCheck = (int) (Math.floor(Math.random() * 10) % 3);
 			switch (empCheck) {
@@ -35,15 +40,13 @@ public class Employee {
 			totalEmpHrs += empHrs;
 			System.out.println("Days : " + totalWorkingDays + "\tEmp hours : " + empHrs);
 		}
-		int totalSalary = empRatePerHour * totalEmpHrs;
-		System.out.println("Total Salary for : " + comname + "is :" + totalSalary);
-		return totalSalary;
+		return totalEmpHrs*compEmpWage.empRatePerHour;
 	}
 
 	public static void main(String[] args) {
-		Employee techMahindra = new Employee("Tech Mahindra", 20, 10, 10);
-		Employee infosys = new Employee("Infosys", 15, 15, 20);
-		techMahindra.calculateWage();
-		infosys.calculateWage();
+		Employee empArray=new Employee();
+		empArray.companyEmpWage("Tech Mahindra", 15, 20, 100);
+		empArray.companyEmpWage("Infosys", 15, 20, 100);
+		empArray.calculateWage();
 	}
 }
