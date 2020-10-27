@@ -1,23 +1,24 @@
 package com.brigelabz;
-
+import java.util.ArrayList;;
 public class Employee implements IEmployeeWage {
 	public static final int IS_FULL_TIME = 1;
 	public static final int IS_PART_TIME = 2;
-	
 
-	private int numOfComany=0;
-	private CompEmpWage[] companyWageArray;
+	
+	private ArrayList<CompEmpWage> companyWageArray;
 	public Employee() {
-		companyWageArray = new CompEmpWage[3];
+		companyWageArray = new ArrayList<>();
 	}
 	public void companyEmpWage(String comname,int empRatePerHour, int numOfWorkingDays, int maxHoursInMonth){
-		companyWageArray[numOfComany]=new CompEmpWage(comname,empRatePerHour, numOfWorkingDays, maxHoursInMonth);
-		numOfComany++;
+		CompEmpWage comWage=new CompEmpWage(comname,empRatePerHour, numOfWorkingDays, maxHoursInMonth);
+		companyWageArray.add(comWage);
+	
 	}
 	public void calculateWage() {
-		for (int i=0;i< numOfComany;i++){
-			companyWageArray[i].setTotalEmpWage(this.calculateWage(companyWageArray[i]));
-			System.out.println(companyWageArray[i]);
+		for (int i=0;i< companyWageArray.size();i++){
+			CompEmpWage companyEmpWage=companyWageArray.get(i);
+			companyEmpWage.setTotalEmpWage(this.calculateWage(companyEmpWage));
+			System.out.println(companyEmpWage);
 		}
 	}
 
