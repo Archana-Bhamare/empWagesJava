@@ -1,6 +1,6 @@
 package com.brigelabz;
 
-public class Employee{
+public class Employee implements IEmployeeWage {
 	public static final int IS_FULL_TIME = 1;
 	public static final int IS_PART_TIME = 2;
 	
@@ -10,7 +10,6 @@ public class Employee{
 	public Employee() {
 		companyWageArray = new CompEmpWage[3];
 	}
-	
 	public void companyEmpWage(String comname,int empRatePerHour, int numOfWorkingDays, int maxHoursInMonth){
 		companyWageArray[numOfComany]=new CompEmpWage(comname,empRatePerHour, numOfWorkingDays, maxHoursInMonth);
 		numOfComany++;
@@ -21,6 +20,7 @@ public class Employee{
 			System.out.println(companyWageArray[i]);
 		}
 	}
+
 	public int calculateWage(CompEmpWage compEmpWage) {
 		 int empHrs = 0, totalEmpHrs = 0,totalWorkingDays = 0;
 		while (totalEmpHrs < compEmpWage.maxHoursInMonth && totalWorkingDays < compEmpWage.numOfWorkingDays) {
